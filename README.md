@@ -33,7 +33,7 @@ OpenCore should be considered in Public Beta stage at this time and is intended 
 
 ## Requirements:
 
-# .efi drivers
+# EFI Drivers
 
 For the majority of systems, you only need 3 .efi drivers to get up and running:
 
@@ -56,7 +56,7 @@ For a full list of compatible drivers, see 11.2 Properties in the [OpenCorePkg D
    
 # Kexts
 
-Work in progress, please refer to [Kexts.md](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Kexts.md) for a full list of supported kexts
+Please refer to [Kexts.md](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Kexts.md) for a full list of supported kexts
 
 # SSDTs
 
