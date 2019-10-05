@@ -262,58 +262,107 @@ Order of kexts is important, they are loaded in this order. Plugins for other ke
 ## Add Properties
 
 ### BundlePath 
+
 **Type:** plist string
+
 **Failsafe:** empty string
+
 **Description:** Kext bundle path (e.g. Lilu.kext or MyKext.kext/Contents/PlugIns/MySubKext.kext).
+
 ### Comment 
+
 **Type:** plist string
+
 **Failsafe:** empty string
+
 **Description:** Arbitrary ASCII string used to provide human readable reference for the entry. It is implementation defined whether this value is used.
+
 ### Enabled
+
 **Type:** plist boolean
+
 **Failsafe:** false/no
+
 **Description:** This kernel driver will not be added unless set to true.
+
 ### ExecutablePath
+
 **Type:** plist string
+
 **Failsafe:** empty string
+
 **Description:** Kext executable path relative to bundle (e.g. Contents/MacOS/Lilu).
+
 ### MaxKernel
+
 **Type:** plist string
+
 **Failsafe:** empty string
-**Description:** Adds kernel driver on specified macOS version or older.
-### MinKernel
-**Type:** plist string
-**Failsafe:** empty string
+
 **Description:** Adds kernel driver on specified macOS version or older.
 
-### PlistPath
+### MinKernel
+
 **Type:** plist string
+
 **Failsafe:** empty string
+
+**Description:** Adds kernel driver on specified macOS version or older.
+
+
+### PlistPath
+
+**Type:** plist string
+
+**Failsafe:** empty string
+
 **Description:** Kext Info.plist path relative to bundle (e.g. Contents/Info.plist).
+
 
 ## Block Properties
 
 ### Comment
+
 **Type:** plist string
+
 **Failsafe:** Empty string
+
 **Description:** Arbitrary ASCII string used to provide human readable reference for the entry. It is implementation defined whether this value is used.
+
 ### Enabled
+
 **Type:** plist boolean
+
 **Failsafe:** false
+
 **Description:** This kernel driver will not be blocked unless set to true.
+
 ### Identifier
+
 **Type:** plist string
+
 **Failsafe:** Empty string
+
 **Description:** Kext bundle identifier (e.g. com.apple.driver.AppleTyMCEDriver).
+
 ### MaxKernel
+
 **Type:** plist string
+
 **Failsafe:** Empty string
+
 **Description:** Blocks kernel driver on specified macOS version or older.
+
 **Note:** Refer to Add MaxKernel description for matching logic.
+
 ### MinKernel
+
 **Type:** plist string
+
 **Failsafe:** Empty string
+
 **Description:** Blocks kernel driver on specified macOS version or newer.
+
 
 **Note:** Refer to Add MaxKernel description for matching logic.
 
