@@ -444,7 +444,7 @@ Order of kexts is important, they are loaded in this order. Plugins for other ke
 
 # Hiding Verbose and Clean Boot
 
-Wanting a more clean booting experience with macOS without all that verbose text while booting? Well you need a couple things:
+Clean boot experience with macOS with no verbose text while booting:
 
 ## Recommended Configuration:
 
