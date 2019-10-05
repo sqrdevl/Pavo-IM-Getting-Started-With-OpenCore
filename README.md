@@ -680,6 +680,10 @@ This option makes the console output spaces instead of tabs. **Note: ConsoleCont
 
 # AMD Zen Based CPU's and Threadripper
 
+## Starting Point
+
+You'll want to start with the sample.plist that OpenCorePkg provides you and rename it to config.plist. Next, open up your favourite XML editor like Xcode and we can get to work.
+
 * [Default OpenCore Config for AMD](https://drive.google.com/open?id=19HRyLcuCyN9YWoQArJA1QTbHduSH1wyE)
 
 Further Information regarding AMD CPU Booting with opencore and how to set various patches can be found here: [AMD OSX Github](https://github.com/AMD-OSX/AMD_Vanilla)
@@ -718,6 +722,56 @@ sudo Utilities/BootInstall/BootInstall.command
 
 This will give you a list of available disks, choose yours and you will be prompted to write a new MBR. Choose yes`[y]` and you'll be finished.
 This will provide you with an EFI partition with a `boot` file, this is where we'll add our OpenCore EFI.
+
+
+
+
+# TroubleShooting
+
+# Stuck on EndRandomSeed
+Couple problems:
+* `ProvideConsoleGop` is likely missing as this is needed for transitioning to the next screen, this was originally part of AptioMemoryFix but is now within OpenCore as this quirk
+
+Other possible problem is that some users either forget or cannot disable CFG-Lock in the BIOS(specifically relating to a locked 0xE2 MSR bit for power managment, obviously much safer to turn off CFG-Lock). When this happens, there's a couple fixes:
+
+* Enable `AppleXcpmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within the XNU itself and likely the cause of the stall. Clover equivalent is `KernelPm`
+* Enable `AppleXcpmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within AppleIntelCPUPowerManagment. Clover equivalent is `AppleIntelCPUPM`
+
+
+# Still waiting on root device
+
+* Gernally seen as a USB error, couple ways to fix:
+* if you're hitting the 15 port limit, you can temporarily get around this with `XhciPortLimit` but for long term use we recommend making a USBMap.
+
+   * Other issue can be that certain firmwares won't pass USB ownership to macOS, to fix this we can enable `ReleaseUsbOwnership`. Clover equivalent is `FixOwnership`
+
+# iMessage and Siri Broken
+
+* En0 device not setup as `Built-in`, couple ways to fix:
+   * Find PCI path for your NIC with [gfxutil](https://github.com/acidanthera/gfxutil/releases)(ex: ethernet@0). Then via DeviceProperties in your config.plist, apply the property of `built-in` with the value of `01` and type `Data`
+   * [NullEthernet.kext](https://bitbucket.org/RehabMan/os-x-null-ethernet/downloads/) + [SSDT-RMNE](https://github.com/RehabMan/OS-X-Null-Ethernet/blob/master/ssdt-rmne.aml)
+
+
+# Incorrect resolution with OpenCore
+
+* Follow Hiding verbose for correct setup, set `UIScale` to `02` for HiDPI
+* Users also have noticed that setting `ConsoleMode` to Max will sometimes fail, leaving it empty can help
+
+# Receiving "Failed to parse real field of type 1"
+* A value is set as `real` when it's not supposed to be, generally being that Xcode converted `HaltLevel` by accident:
+```
+<key>HaltLevel</key>
+<real>2147483648</real>
+```
+To fix, swap `real` for `integer`:
+```
+<key>HaltLevel</key>
+<integer>2147483648</integer>
+```
+
+# Booting OpenCore reboots to BIOS
+
+* Incorrect EFI folder structure, make sure all of your OC files are within an EFI folder located on your ESP(EFI system partition)
 
 
 # How to Enable a bootchime?
