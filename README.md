@@ -710,8 +710,7 @@ Other possible problem is that some users either forget or cannot disable CFG-Lo
 # Still waiting on root device
 
 * Gernally seen as a USB error, couple ways to fix:
-* if you're hitting the 15 port limit, you can temporarily get around this with `XhciPortLimit` but for long term use we recommend making a USBMap.
-
+   * if you're hitting the 15 port limit, you can temporarily get around this with `XhciPortLimit` but for long term use we recommend making a [USBmap](https://github.com/InsanelyHack/USBMap). CorpNewt also has a guide for this: [USBmap Guide](https://usb-map.gitbook.io/project/)
    * Other issue can be that certain firmwares won't pass USB ownership to macOS, to fix this we can enable `ReleaseUsbOwnership`. Clover equivalent is `FixOwnership`
 
 # iMessage and Siri Broken
@@ -720,10 +719,13 @@ Other possible problem is that some users either forget or cannot disable CFG-Lo
    * Find PCI path for your NIC with [gfxutil](https://github.com/acidanthera/gfxutil/releases)(ex: ethernet@0). Then via DeviceProperties in your config.plist, apply the property of `built-in` with the value of `01` and type `Data`
    * [NullEthernet.kext](https://bitbucket.org/RehabMan/os-x-null-ethernet/downloads/) + [SSDT-RMNE](https://github.com/RehabMan/OS-X-Null-Ethernet/blob/master/ssdt-rmne.aml)
 
+# Windows Startup Disk can't see APFS drives
+
+* Outdated Bootcamp drivers(generally ver 6.0 will come with brigadier, BootCamp Utility in macOS provides newer version like ver 6.1). InsanelyHack has also forked brigadier fixing these issues as well: [brigadier](https://github.com/InsanelyHack/brigadier)
 
 # Incorrect resolution with OpenCore
 
-* Follow Hiding verbose for correct setup, set `UIScale` to `02` for HiDPI
+* Follow [Hiding Verbose](verbose.md) for correct setup, set `UIScale` to `02` for HiDPI
 * Users also have noticed that setting `ConsoleMode` to Max will sometimes fail, leaving it empty can help
 
 # Receiving "Failed to parse real field of type 1"
@@ -741,6 +743,8 @@ To fix, swap `real` for `integer`:
 # Booting OpenCore reboots to BIOS
 
 * Incorrect EFI folder structure, make sure all of your OC files are within an EFI folder located on your ESP(EFI system partition)
+
+![Directory Structure from OpenCore's DOC](https://i.imgur.com/9RyBQ0L.png)
 
 
 # How to Enable a bootchime?
