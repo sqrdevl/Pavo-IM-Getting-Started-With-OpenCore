@@ -649,9 +649,13 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 
 You'll want to start with the sample.plist that OpenCorePkg provides you and rename it to config.plist. Next, open up your favourite XML editor like Xcode and we can get to work.
 
-* [Default OpenCore Config for AMD](https://drive.google.com/open?id=19HRyLcuCyN9YWoQArJA1QTbHduSH1wyE)
+Kernel patches:
+* [Ryzen/Threadripper(17h)](https://cdn.discordapp.com/attachments/611462337446281236/630939338133209139/OC-patches-17h.plist) (10.13, 10.14, and 10.15)
+* [Bulldozer/Jaguar(15h/16h)](https://cdn.discordapp.com/attachments/611462337446281236/630939338133209138/OC-patches-15_16h.plist) (10.13, 10.14, and 10.15)
 
-Further Information regarding AMD CPU Booting with opencore and how to set various patches can be found here: [AMD OSX Github](https://github.com/AMD-OSX/AMD_Vanilla)
+Do note that these patches are pulled from the [AMD OS X discord](https://discord.gg/EfCYAJW) and that they're made for OpenCore 0.5.0. Users of 0.5.1 will need to wait for updated patches.
+
+**Extra Importamt Note**: Current kernel patches will only work with [041045f](https://github.com/acidanthera/OpenCorePkg/tree/cd481d011bab6dc887629fe15962cd8f3cbed775) and older. To ease users experiences, please use [OpenCorePkg 0.5.0](https://github.com/acidanthera/OpenCorePkg/releases)
 
 
 
