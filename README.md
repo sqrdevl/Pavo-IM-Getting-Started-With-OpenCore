@@ -20,18 +20,44 @@ OpenCore should be considered in Public Beta stage at this time and is intended 
 # Current known issues
 ### Refer to opencore bugtracker for current known bugs [here](https://github.com/acidanthera/bugtracker/issues) 
 
-### Things to note with OpenCore
+### Opencore Pro's
+* One average, OpenCore systems boot faster than those using Clover.
+* OpenCore offers better overall security and better support for FileVault.
+* OpenCore supports boot hotkey support via boot.efi - hold Option or ESC at startup to choose a boot device, Command+R to enter Recovery or Command+Option+P+R to reset NVRAM.
+* OpenCore is designed with the future in mind, and uses modern methods to inject kernel extensions without breaking System Integrity Protection.
+* BootCamp switching and boot device selection are supported by reading NVRAM variables set by Startup Disk just like a real mac.
+* Furture development for AptioMemoryFix is directly tied to OpenCore, specifically being absorbed into OpenCore itself with the FwRuntimeVariable.efi being used as an extension.
+* UEFI and Legacy boot modes are supported.
 
-* OpenCore supports both UEFI and Legacy boot options.
-* Automatic drive/partition boot is handled by StartUp Disk just like a real Mac, this is also referred to as "bless".
-* Make sure to have kexts like Lilu and VoodooPS2Controller are to be injected first before kexts that require them like WhateverGreen, VirtualSMC, keyboard/Mouse/Trackpad and etc.
-* ACPI patches and SSDTs apply to all operating systems.
-* Some systems like Z97 require pure UEFI mode for booting (also known as Windows 8/10 mode).
-* AptioMemoryFix has been split between OpenCore and FwRuntimeServices.efi, please use that instead from 0.0.4 Onwards.
+### OpenCore Must's
+* Kernel extensions are loaded in the order specified in your config file, so you must load an extension's dependencies before you load the extension itself. For example, Lilu must be loaded before WhateverGreen or VirtualSMC.
+* ACPI patches and SSDTs are applied to all operating systems. 
+* Some systems require pure UEFI mode to boot. (This setting is commonly called "Windows 8/10 Mode" by motherboard manufacturers.)
+* Issues can occur if NVMe devices are set up as SATA devices in the BIOS.
 
 # Getting Started
 
 ## Requirements:
+
+* OpenCorePkg (Recommend to build from scratch instead of using the prebuilt package as OpenCore is constantly being updated. As of writing we're on Version 0.5.1 even though the current official release is 0.5.0). Easiest way to build is via the macbuild.tool or Use Pavo's Opencore Builder App to Create the Entire EFI Folder (Requires Xcode Installed)
+
+## Recommended BIOS settings:
+
+### Disable:
+* Fast Boot
+* CFG Lock(MSR 0xE2 write protection)
+* VT-d(can be enabled if you set DisableIoMapper to YES)
+* CSM
+* Thunderbolt
+* Intel SGX
+* Intel Platform Trust
+### Enable:
+* VT-x
+* Above 4G decoding
+* Hyper Threading
+* Execute Disable Bit
+* EHCI/XHCI Hand-off
+* OS type: Windows 8.1/10
 
 # EFI Drivers
 
