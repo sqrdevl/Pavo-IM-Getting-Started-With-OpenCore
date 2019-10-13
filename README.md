@@ -1,4 +1,4 @@
-![logo](https://i.imgur.com/SR3IVCx.png)
+![logo](https://i.imgur.com/dtoe9Oj.png)
 
 # Getting Started With OpenCore 0.5.1
 
