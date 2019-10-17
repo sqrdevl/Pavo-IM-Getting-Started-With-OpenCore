@@ -759,7 +759,7 @@ To fix, swap `real` for `integer`:
 
 
 # Credits
-* [khtonokernel] (https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide) For the Orginal Guide
+* [khtonokernel](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide) For the Orginal Guide
 * [Apple](https://www.apple.com) for MacOS.
 * [Acidanthera](https://github.com/acidanthera) for everything they contribute to hackintosh. :)
 * [Pavo-IM](https://github.com/Pavo-IM) for Opencore Builder and edits
