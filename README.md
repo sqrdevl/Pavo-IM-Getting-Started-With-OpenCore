@@ -386,6 +386,7 @@ Order of kexts is important, they are loaded in this order. Plugins for other ke
 * **LapicKernelPanic**: NO 
   * Disables kernel panic on AP core lapic interrupt, generally needed for HP systems. Clover equivalent is `Kernel LAPIC`
 * **PanicNoKextDump**: YES 
+* **PowerTimeoutKernelPanic**: An additional security measure was added to macOS Catalina (10.15) causing kernel panic on power change timeout for Apple drivers. Sometimes it may cause issues on misconfigured hardware, notably digital audio, which sometimes fails to wake up. For debug kernels `\texttt{setpowerstate\_panic=0}` boot argument should be used, which is otherwise equivalent to this quirk.
   * Allows for reading kernel panics logs when kernel panics occurs
 * **ThirdPartyTrim**: NO 
   * Enables TRIM, not needed for NVMe but AHCI based drives may require this. Please check under system report to see if your drive supports TRIM
