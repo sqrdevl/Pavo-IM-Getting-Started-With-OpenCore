@@ -276,12 +276,17 @@ originally implemented as a part of AptioMemoryFix.efi, which is no longer maint
    * Needed for fixing artifacts and sleep-wake issues, AvoidRuntimeDefrag resolves this already so avoid this quirk unless necessary
 * **ProvideCustomSlide**: YES
    * If there's a conflicting slide value, this option forces macOS to
-
-      use a pseudo-random value. Needed for those receiving `Only N/256 slide values are usable!` debug message
+   * use a pseudo-random value. Needed for those receiving `Only N/256 slide values are usable!` debug message
 * **SetupVirtualMap**: YES
    * Fixes SetVirtualAddresses calls to virtual addresses
 * **ShrinkMemoryMap**: NO
    * Needed for systems with large memory maps that don't fit, don't use unless necessary
+* **MmioWhiteList**:
+   * Designed to be filled with plist dict values, describing addresses critical for particular firmware functioning when DevirtualiseMmio quirk is in use. See MmioWhitelist Properties section below.
+
+## MmioWhitelist Properties
+* Exceptional MMIO address, which memory descriptor should be left virtualised (unchanged) by DevirtualiseMmio. This means that the firmware will be able to directly communicate with this memory region during operating system functioning, because the region this value is in will be assigned a virtual address.
+*The addresses written here must be part of the memory map, have EfiMemoryMappedIO type and EFI_MEMORY_RUNTIME attribute (highest bit) set. To find the list of the candidates the debug log can be used.
 
 
 # Fixing Certain NVRAM Issues
@@ -373,28 +378,27 @@ Order of kexts is important, they are loaded in this order. Plugins for other ke
 **Quirks**:
 
 * **AppleCpuPmCfgLock**: NO 
-  * Only needed when CFG-Lock can't be disabled in BIOS, Clover counterpart would be AppleICPUPM
+* Only needed when CFG-Lock can't be disabled in BIOS, Clover counterpart would be AppleICPUPM
 * **AppleXcpmCfgLock**: NO 
-  * Only needed when CFG-Lock can't be disabled in BIOS, Clover counterpart would be KernelPM
+* Only needed when CFG-Lock can't be disabled in BIOS, Clover counterpart would be KernelPM
 * **AppleXcpmExtraMsrs**: NO 
-  * Disables multiple MSR access needed for unsupported CPUs like Pentiums and certain Xeons
+* Disables multiple MSR access needed for unsupported CPUs like Pentiums and certain Xeons
 * **CustomSMBIOSGuid**: NO 
-  * Performs GUID patching for UpdateSMBIOSMode Custom mode. Usually relevant for Dell laptops
+* Performs GUID patching for UpdateSMBIOSMode Custom mode. Usually relevant for Dell laptops
 * **DisableIOMapper**: YES 
-  * Needed to get around VT-D if  either unable to disable in BIOS or needed for other operating systems
+* Needed to get around VT-D if  either unable to disable in BIOS or needed for other operating systems
 * **ExternalDiskIcons**: YES 
-  * External Icons Patch, for when internal drives are treated as external drives but can also make USB drives internal. For NVMe on Z87 and below you just add built-in property via DeviceProperties.
+* External Icons Patch, for when internal drives are treated as external drives but can also make USB drives internal. For NVMe on Z87 and below you just add built-in property via DeviceProperties.
 * **LapicKernelPanic**: NO 
-  * Disables kernel panic on AP core lapic interrupt, generally needed for HP systems. Clover equivalent is `Kernel LAPIC`
+* Disables kernel panic on AP core lapic interrupt, generally needed for HP systems. Clover equivalent is `Kernel LAPIC`
 * **PanicNoKextDump**: YES
 * Allows for reading kernel panics logs when kernel panics occurs.
-
-* **PowerTimeoutKernelPanic**: An additional security measure was added to macOS Catalina (10.15) causing kernel panic on power change timeout for Apple drivers. Sometimes it may cause issues on misconfigured hardware, notably digital audio, which sometimes fails to wake up. For debug kernels `\texttt{setpowerstate\_panic=0}` boot argument should be used, which is otherwise equivalent to this quirk.
- 
-* **ThirdPartyTrim**: NO 
-  * Enables TRIM, not needed for NVMe but AHCI based drives may require this. Please check under system report to see if your drive supports TRIM
+* **PowerTimeoutKernelPanic**: NO
+* An additional security measure was added to macOS Catalina (10.15) causing kernel panic on power change timeout for Apple drivers. Sometimes it may cause issues on misconfigured hardware, notably digital audio, which sometimes fails to wake up. For debug kernels `\texttt{setpowerstate\_panic=0}` boot argument should be used, which is otherwise equivalent to this quirk.
+ * **ThirdPartyTrim**: NO 
+* Enables TRIM, not needed for NVMe but AHCI based drives may require this. Please check under system report to see if your drive supports TRIM
 * **XhciPortLimit**: YES 
-  * This is actually the 15 port limit patch, don't rely on it as it's not a guaranteed solution for fixing USB. Please create a [USB map](https://usb-map.gitbook.io/project/) when possible as.
+* This is actually the 15 port limit patch, don't rely on it as it's not a guaranteed solution for fixing USB. Please create a [USB map](https://usb-map.gitbook.io/project/) when possible as.
 
 The reason being is that UsbInjectAll reimplements builtin macOS functionality without proper current tuning. It is much cleaner to just describe your ports in a single plist-only kext, which will not waste runtime memory and such
 
