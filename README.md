@@ -1,6 +1,7 @@
 ![logo](https://i.imgur.com/dtoe9Oj.png)
 
-# Getting Started With OpenCore 0.5.1
+# Getting Started With OpenCore 0.5.2 
+## Updated 17th October
 
 A brief guide to using the OpenCore boot-loader for hackintoshes
 
