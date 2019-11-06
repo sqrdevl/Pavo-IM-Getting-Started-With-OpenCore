@@ -1,4 +1,5 @@
 #  MSI MPG X570 Gaming Plus
+## Ryzen 7 3700x, Vega 64 GPU
 
 Support CPU:
 -Ryzen 3rd Gen CPU
