@@ -1,6 +1,5 @@
 ![logo](https://i.imgur.com/dtoe9Oj.png)
 
-<<<<<<< HEAD
 # OpenCore Starter Guide 0.5.3 
 ## Updated 17th October
 
