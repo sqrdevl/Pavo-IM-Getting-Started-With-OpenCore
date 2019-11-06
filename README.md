@@ -1,6 +1,6 @@
 ![logo](https://i.imgur.com/dtoe9Oj.png)
 
-# Getting Started With OpenCore 0.5.2 
+# OpenCore Starter Guide 0.5.3 
 ## Updated 17th October
 
 A brief guide to using the OpenCore boot-loader for hackintoshes
@@ -767,7 +767,7 @@ To fix, swap `real` for `integer`:
 
 
 # Credits
-* [khtonokernel](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide) For the Orginal Guide
+* [khtonokernel](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide) For the Orginal Guide Which is amazing!
 * [Apple](https://www.apple.com) for MacOS.
 * [Acidanthera](https://github.com/acidanthera) for everything they contribute to hackintosh. :)
 * [Pavo-IM](https://github.com/Pavo-IM) for Opencore Builder and edits
